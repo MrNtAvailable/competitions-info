@@ -81,6 +81,7 @@ outputs:
       enabled: yes
       filename: fast.log
       append: yes
+      format: "[%timestamp] [%event_type] %src_ip:%src_port -> %dest_ip:%dest_port %proto"
       #filetype: regular # 'regular', 'unix_stream' or 'unix_dgram'
 
   # Extensible Event Format (nicknamed EVE) event log in JSON format
@@ -638,9 +639,9 @@ af-packet:
     # phase. This will result in some packets (at max a ring flush) not being inspected.
     #use-emergency-flush: yes
     # recv buffer size, increased value could improve performance
-    # buffer-size: 32768
+    buffer-size: 34535
     # Set to yes to disable promiscuous mode
-    # disable-promisc: no
+    disable-promisc: no
     # Choose checksum verification mode for the interface. At the moment
     # of the capture, some packets may have an invalid checksum due to
     # the checksum computation being offloaded to the network card.
@@ -659,7 +660,7 @@ af-packet:
     # interface will be copied to the copy-iface interface. If 'tap' is set, the
     # copy is complete. If 'ips' is set, the packet matching a 'drop' action
     # will not be copied.
-    copy-mode: ips
+    copy-mode: tap
     #copy-iface: eth1
     #  For eBPF and XDP setup including bypass, filter and load balancing, please
     #  see doc/userguide/capture-hardware/ebpf-xdp.rst for more info.

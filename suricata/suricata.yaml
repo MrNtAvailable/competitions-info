@@ -83,7 +83,11 @@ outputs:
       append: yes
       format: "[%timestamp] [%event_type] %src_ip:%src_port -> %dest_ip:%dest_port %proto - %alert_signature"
       #filetype: regular # 'regular', 'unix_stream' or 'unix_dgram'
-
+  - fast:
+      enabled: yes
+      filename: src_dport.log
+      append: yes
+      format: "%src_ip"
   # Extensible Event Format (nicknamed EVE) event log in JSON format
   - eve-log:
       enabled: yes
@@ -660,7 +664,7 @@ af-packet:
     # interface will be copied to the copy-iface interface. If 'tap' is set, the
     # copy is complete. If 'ips' is set, the packet matching a 'drop' action
     # will not be copied.
-    copy-mode: ips
+    copy-mode: ids
     #copy-iface: eth1
     #  For eBPF and XDP setup including bypass, filter and load balancing, please
     #  see doc/userguide/capture-hardware/ebpf-xdp.rst for more info.
